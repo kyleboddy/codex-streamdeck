@@ -28,6 +28,20 @@ export const EFFORTS = [
   { value: "ultra", label: "Ultra" },
 ];
 
+const MODEL_DIAL_LABELS = Object.freeze({
+  "gpt-5.6-sol": "Sol",
+  "gpt-5.6-terra": "Terra",
+  "gpt-5.6-luna": "Luna",
+  "gpt-5.5": "5.5",
+  "gpt-5.4": "5.4",
+  "gpt-5.4-mini": "5.4-Mini",
+  "gpt-5.3-codex-spark": "5.3-Spark",
+});
+
+export function modelDialLabel(model) {
+  return MODEL_DIAL_LABELS[model.id] || model.displayName || model.id;
+}
+
 const DEFAULT_CONFIG = {
   version: 1,
   selection: { model: null, effort: "high" },
@@ -205,7 +219,7 @@ export class CodexDeckController extends EventEmitter {
     if (this.models.length) {
       return this.models.map((model) => ({
         value: model.id,
-        label: model.displayName || model.id,
+        label: modelDialLabel(model),
         description: model.description,
         efforts: model.supportedReasoningEfforts || [],
         defaultEffort: model.defaultReasoningEffort,

@@ -11,9 +11,26 @@ test.beforeEach(async () => {
   await rm(join(localAppData, "CodexDeck", "deck-config.json"), { force: true });
 });
 
-const { CodexDeckController, EFFORTS } = await import(
+const { CodexDeckController, EFFORTS, modelDialLabel } = await import(
   "../com.driveline.codex-command-center.sdPlugin/bin/controller.js?controller-test"
 );
+
+test("Model dial uses compact labels for the live Codex catalog", () => {
+  const labels = [
+    ["gpt-5.6-sol", "Sol"],
+    ["gpt-5.6-terra", "Terra"],
+    ["gpt-5.6-luna", "Luna"],
+    ["gpt-5.5", "5.5"],
+    ["gpt-5.4", "5.4"],
+    ["gpt-5.4-mini", "5.4-Mini"],
+    ["gpt-5.3-codex-spark", "5.3-Spark"],
+  ];
+
+  for (const [id, expected] of labels) {
+    assert.equal(modelDialLabel({ id, displayName: `Long name for ${id}` }), expected);
+  }
+  assert.equal(modelDialLabel({ id: "future-model", displayName: "Future Model" }), "Future Model");
+});
 
 const effortOptions = (values) =>
   values.map((reasoningEffort) => ({ reasoningEffort, description: reasoningEffort }));
