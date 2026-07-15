@@ -18,7 +18,7 @@ const profileManifestPath = join(
 const json = async (path) => JSON.parse(await readFile(path, "utf8"));
 const hash = async (path) => createHash("sha256").update(await readFile(path)).digest("hex");
 
-test("the installed profile is six direct buttons, two blanks, and two dials", async () => {
+test("the installed profile is six direct buttons, a sentinel, one blank, and two dials", async () => {
   const profile = await json(profileManifestPath);
   const keypad = profile.Controllers.find(({ Type }) => Type === "Keypad").Actions;
   const encoders = profile.Controllers.find(({ Type }) => Type === "Encoder").Actions;
@@ -32,7 +32,7 @@ test("the installed profile is six direct buttons, two blanks, and two dials", a
       ["3,0", "decline"],
       ["0,1", "stop"],
       ["1,1", "fork"],
-      ["2,1", "blank1"],
+      ["2,1", "sentinel"],
       ["3,1", "blank2"],
     ],
   );
@@ -47,9 +47,9 @@ test("the installed profile is six direct buttons, two blanks, and two dials", a
 
 test("all marketplace actions have unique production artwork", async () => {
   const manifest = await json(join(pluginRoot, "manifest.json"));
-  assert.equal(manifest.Actions.length, 12);
+  assert.equal(manifest.Actions.length, 13);
   assert.equal(manifest.Actions.filter(({ Controllers }) => Controllers.includes("Encoder")).length, 2);
-  assert.equal(manifest.Actions.filter(({ Controllers }) => Controllers.includes("Keypad")).length, 10);
+  assert.equal(manifest.Actions.filter(({ Controllers }) => Controllers.includes("Keypad")).length, 11);
 
   const imageHashes = [];
   for (const action of manifest.Actions) {
@@ -62,10 +62,10 @@ test("all marketplace actions have unique production artwork", async () => {
   assert.equal(new Set(imageHashes).size, manifest.Actions.length);
 });
 
-test("the GPT Image source artwork contains thirteen distinct compositions", async () => {
+test("the GPT Image source artwork contains fourteen distinct compositions", async () => {
   const generatedRoot = join(root, "assets", "generated");
   const files = (await readdir(generatedRoot)).filter((name) => name.endsWith(".png")).sort();
-  assert.equal(files.length, 13);
+  assert.equal(files.length, 14);
   const hashes = await Promise.all(files.map((name) => hash(join(generatedRoot, name))));
   assert.equal(new Set(hashes).size, files.length);
 });

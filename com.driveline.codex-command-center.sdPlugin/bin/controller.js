@@ -4,6 +4,7 @@ import { existsSync, mkdirSync, readFileSync, renameSync, writeFileSync } from "
 import { createConnection } from "node:net";
 import { dirname, join } from "node:path";
 import { CodexRpcClient } from "./codex-client.js";
+import { activityFromBridgeSnapshot } from "./sentinel.js";
 
 const CONTROL_PIPE = "\\\\.\\pipe\\codex-deck-control";
 const CONFIG_PATH = join(process.env.LOCALAPPDATA || process.cwd(), "CodexDeck", "deck-config.json");
@@ -125,6 +126,8 @@ export class CodexDeckController extends EventEmitter {
     this.config = readConfig(logger);
     this.models = [];
     this.queue = Promise.resolve();
+    this.activityState = "disconnected";
+    this.activitySnapshot = null;
     this.rpc.on("notification", (message) => this.#observeNotification(message));
   }
 
@@ -151,6 +154,43 @@ export class CodexDeckController extends EventEmitter {
     retry();
     this.reconnectTimer = setInterval(retry, 2_000);
     this.reconnectTimer.unref?.();
+  }
+
+  activity() {
+    return { state: this.activityState, snapshot: this.activitySnapshot };
+  }
+
+  async refreshActivity() {
+    try {
+      const snapshot = await this.control({ command: "state" });
+      this.#setActivity(activityFromBridgeSnapshot(snapshot), snapshot);
+    } catch (error) {
+      this.logger?.debug?.(`Codex activity unavailable: ${error.message}`);
+      this.#setActivity("disconnected", null);
+    }
+    return this.activity();
+  }
+
+  startActivityMonitor(intervalMs = 500) {
+    if (this.activityTimer) return;
+    const poll = async () => {
+      if (this.activityPollPending) return;
+      this.activityPollPending = true;
+      try {
+        await this.refreshActivity();
+      } finally {
+        this.activityPollPending = false;
+      }
+    };
+    void poll();
+    this.activityTimer = setInterval(() => void poll(), intervalMs);
+    this.activityTimer.unref?.();
+  }
+
+  stopActivityMonitor() {
+    if (!this.activityTimer) return;
+    clearInterval(this.activityTimer);
+    this.activityTimer = null;
   }
 
   selection() {
@@ -412,6 +452,13 @@ export class CodexDeckController extends EventEmitter {
     if (message.method === "model/list/updated") {
       void this.refreshModels().catch((error) => this.logger?.error?.(error.message));
     }
+  }
+
+  #setActivity(state, snapshot) {
+    const changed = state !== this.activityState;
+    this.activityState = state;
+    this.activitySnapshot = snapshot;
+    if (changed) this.emit("activity", this.activity());
   }
 
   async #ensureReady() {

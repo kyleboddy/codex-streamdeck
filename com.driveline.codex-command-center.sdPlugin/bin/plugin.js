@@ -1,6 +1,7 @@
 import streamDeck, { SingletonAction } from "@elgato/streamdeck";
 import { runWithFeedback } from "./action-feedback.js";
 import { CodexDeckController, EFFORTS } from "./controller.js";
+import { sentinelFrameDelay, sentinelFramePath } from "./sentinel.js";
 
 const PLUGIN_UUID = "com.driveline.codex-command-center";
 const PROFILE_NAME = "Codex Command Center";
@@ -40,6 +41,64 @@ class CommandAction extends SingletonAction {
 
   async onKeyDown(event) {
     await report(event.action, () => controller.execute(this.command));
+  }
+}
+
+class SentinelKey extends SingletonAction {
+  manifestId = `${PLUGIN_UUID}.sentinel`;
+  targets = new Set();
+  state = controller.activity().state;
+  frameIndex = 0;
+  animationTimer = null;
+
+  constructor() {
+    super();
+    controller.on("activity", ({ state }) => {
+      this.state = state;
+      this.frameIndex = 0;
+      void this.renderAll();
+      this.schedule();
+    });
+  }
+
+  async render(target) {
+    if (!target.isKey()) return;
+    await target.setImage(sentinelFramePath(this.state, this.frameIndex));
+  }
+
+  async renderAll() {
+    await Promise.allSettled([...this.targets].map((target) => this.render(target)));
+  }
+
+  schedule() {
+    if (this.animationTimer || !this.targets.size) return;
+    const delay = sentinelFrameDelay(this.state, this.targets.size);
+    this.animationTimer = setTimeout(async () => {
+      this.animationTimer = null;
+      this.frameIndex += 1;
+      await this.renderAll();
+      this.schedule();
+    }, delay);
+    this.animationTimer.unref?.();
+  }
+
+  async onWillAppear(event) {
+    if (!event.action.isKey()) return;
+    this.targets.add(event.action);
+    await this.render(event.action);
+    this.schedule();
+  }
+
+  onWillDisappear(event) {
+    this.targets.delete(event.action);
+    if (!this.targets.size && this.animationTimer) {
+      clearTimeout(this.animationTimer);
+      this.animationTimer = null;
+    }
+  }
+
+  async onKeyDown() {
+    await controller.refreshActivity();
   }
 }
 
@@ -142,6 +201,7 @@ class ModelDial extends SingletonAction {
 
 streamDeck.actions.registerAction(new ReasoningDial());
 streamDeck.actions.registerAction(new ModelDial());
+streamDeck.actions.registerAction(new SentinelKey());
 streamDeck.actions.registerAction(new CommandAction("new-task", "new-task", "New Task"));
 streamDeck.actions.registerAction(new CommandAction("review", "review", "Review"));
 streamDeck.actions.registerAction(new CommandAction("approve", "approve", "Approve"));
@@ -156,4 +216,5 @@ streamDeck.devices.onDeviceDidConnect((event) => void activateProfile(event.devi
 
 await streamDeck.connect();
 controller.startAutoReconnect();
+controller.startActivityMonitor();
 for (const device of streamDeck.devices) void activateProfile(device);

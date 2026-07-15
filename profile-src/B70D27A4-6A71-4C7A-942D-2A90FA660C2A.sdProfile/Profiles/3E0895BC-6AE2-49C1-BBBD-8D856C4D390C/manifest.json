@@ -46,8 +46,8 @@
           "States": [{ "Image": "", "Title": "Fork", "TitleAlignment": "bottom", "TitleColor": "#FFFFFF", "FontSize": 13 }]
         },
         "2,1": {
-          "Name": "Custom Slot 1",
-          "UUID": "com.driveline.codex-command-center.blank1",
+          "Name": "Deck Sentinel",
+          "UUID": "com.driveline.codex-command-center.sentinel",
           "Settings": {},
           "State": 0,
           "States": [{ "Image": "", "Title": "", "TitleAlignment": "bottom", "TitleColor": "#FFFFFF", "FontSize": 13 }]

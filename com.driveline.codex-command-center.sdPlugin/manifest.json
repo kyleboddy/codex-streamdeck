@@ -46,6 +46,22 @@
       ]
     },
     {
+      "Name": "Deck Sentinel",
+      "UUID": "com.driveline.codex-command-center.sentinel",
+      "Icon": "imgs/action-list/sentinel",
+      "Controllers": [
+        "Keypad"
+      ],
+      "States": [
+        {
+          "Image": "imgs/actions/sentinel",
+          "TitleAlignment": "bottom",
+          "TitleColor": "#FFFFFF",
+          "FontSize": 11
+        }
+      ]
+    },
+    {
       "Name": "New Task",
       "UUID": "com.driveline.codex-command-center.new-task",
       "Icon": "imgs/action-list/new-task",
