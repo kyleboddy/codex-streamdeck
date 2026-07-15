@@ -1,0 +1,55 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test-and-package:
+    name: Test, validate, and package
+    runs-on: windows-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: |
+            package-lock.json
+            com.driveline.codex-command-center.sdPlugin/package-lock.json
+
+      - name: Install development dependencies
+        run: npm ci --ignore-scripts
+
+      - name: Install plugin runtime dependencies
+        working-directory: com.driveline.codex-command-center.sdPlugin
+        run: npm ci --omit=dev --ignore-scripts
+
+      - name: Run tests
+        run: npm test
+
+      - name: Build Stream Deck profile
+        run: npm run profile
+
+      - name: Validate Stream Deck plugin
+        run: npm run validate
+
+      - name: Package Stream Deck plugin
+        run: npm run pack
+
+      - name: Upload plugin package
+        uses: actions/upload-artifact@v4
+        with:
+          name: codex-command-center-streamdeck-plugin
+          path: dist/*.streamDeckPlugin
+          if-no-files-found: error

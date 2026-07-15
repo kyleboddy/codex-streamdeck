@@ -1,0 +1,9 @@
+{
+  "name": "com.driveline.codex-command-center",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@elgato/streamdeck": "2.1.0",
+    "ws": "8.21.1"
+  }
+}

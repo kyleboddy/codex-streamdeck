@@ -1,0 +1,41 @@
+{
+  "name": "codex-stream-deck-command-center",
+  "private": true,
+  "version": "1.0.0",
+  "description": "A Co-Lab-inspired Stream Deck + control surface for the Codex Windows app.",
+  "license": "Apache-2.0",
+  "homepage": "https://github.com/kyleboddy/codex-streamdeck#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/kyleboddy/codex-streamdeck.git"
+  },
+  "bugs": {
+    "url": "https://github.com/kyleboddy/codex-streamdeck/issues"
+  },
+  "keywords": [
+    "codex",
+    "stream-deck",
+    "stream-deck-plus",
+    "openai",
+    "windows"
+  ],
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "assets": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/generate-assets.ps1",
+    "profile": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/build-profile.ps1",
+    "transport": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/build-transport.ps1",
+    "launcher": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/build-launcher.ps1",
+    "build": "npm run assets && npm run profile && npm run transport && npm run launcher",
+    "install:local": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/install-local.ps1",
+    "diagnose": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/diagnose.ps1",
+    "test": "node --test test/*.test.mjs",
+    "validate": "streamdeck validate com.driveline.codex-command-center.sdPlugin --no-update-check",
+    "pack": "streamdeck pack com.driveline.codex-command-center.sdPlugin --output dist --force --no-update-check"
+  },
+  "devDependencies": {
+    "@elgato/cli": "1.7.4",
+    "postject": "1.0.0-alpha.6"
+  }
+}

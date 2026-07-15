@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "selection": {
+    "model": null,
+    "effort": "high"
+  },
+  "blanks": {
+    "blank1": {
+      "title": "",
+      "type": "none",
+      "value": ""
+    },
+    "blank2": {
+      "title": "",
+      "type": "none",
+      "value": ""
+    }
+  }
+}

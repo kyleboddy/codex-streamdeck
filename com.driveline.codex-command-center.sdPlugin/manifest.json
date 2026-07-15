@@ -1,0 +1,245 @@
+{
+  "$schema": "https://schemas.elgato.com/streamdeck/plugins/manifest.json",
+  "Actions": [
+    {
+      "Name": "Brainpower",
+      "UUID": "com.driveline.codex-command-center.reasoning",
+      "Icon": "imgs/action-list/brainpower",
+      "Controllers": [
+        "Encoder"
+      ],
+      "Encoder": {
+        "Icon": "imgs/actions/brainpower",
+        "layout": "$B1",
+        "StackColor": "#10A37F",
+        "TriggerDescription": {
+          "Rotate": "Choose Light through Ultra reasoning",
+          "Push": "Reset to High"
+        }
+      },
+      "States": [
+        {
+          "Image": "imgs/actions/brainpower"
+        }
+      ]
+    },
+    {
+      "Name": "Model",
+      "UUID": "com.driveline.codex-command-center.model",
+      "Icon": "imgs/action-list/model",
+      "Controllers": [
+        "Encoder"
+      ],
+      "Encoder": {
+        "Icon": "imgs/actions/model",
+        "layout": "$B1",
+        "StackColor": "#5B8CFF",
+        "TriggerDescription": {
+          "Rotate": "Choose from the live Codex model catalog",
+          "Push": "Refresh and reset to the preferred model"
+        }
+      },
+      "States": [
+        {
+          "Image": "imgs/actions/model"
+        }
+      ]
+    },
+    {
+      "Name": "New Task",
+      "UUID": "com.driveline.codex-command-center.new-task",
+      "Icon": "imgs/action-list/new-task",
+      "Controllers": [
+        "Keypad"
+      ],
+      "States": [
+        {
+          "Image": "imgs/actions/new-task",
+          "TitleAlignment": "bottom",
+          "TitleColor": "#FFFFFF",
+          "FontSize": 13
+        }
+      ]
+    },
+    {
+      "Name": "Review Changes",
+      "UUID": "com.driveline.codex-command-center.review",
+      "Icon": "imgs/action-list/review",
+      "Controllers": [
+        "Keypad"
+      ],
+      "States": [
+        {
+          "Image": "imgs/actions/review",
+          "TitleAlignment": "bottom",
+          "TitleColor": "#FFFFFF",
+          "FontSize": 13
+        }
+      ]
+    },
+    {
+      "Name": "Approve",
+      "UUID": "com.driveline.codex-command-center.approve",
+      "Icon": "imgs/action-list/approve",
+      "Controllers": [
+        "Keypad"
+      ],
+      "States": [
+        {
+          "Image": "imgs/actions/approve",
+          "TitleAlignment": "bottom",
+          "TitleColor": "#FFFFFF",
+          "FontSize": 13
+        }
+      ]
+    },
+    {
+      "Name": "Decline",
+      "UUID": "com.driveline.codex-command-center.decline",
+      "Icon": "imgs/action-list/decline",
+      "Controllers": [
+        "Keypad"
+      ],
+      "States": [
+        {
+          "Image": "imgs/actions/decline",
+          "TitleAlignment": "bottom",
+          "TitleColor": "#FFFFFF",
+          "FontSize": 13
+        }
+      ]
+    },
+    {
+      "Name": "Stop Turn",
+      "UUID": "com.driveline.codex-command-center.stop",
+      "Icon": "imgs/action-list/stop",
+      "Controllers": [
+        "Keypad"
+      ],
+      "States": [
+        {
+          "Image": "imgs/actions/stop",
+          "TitleAlignment": "bottom",
+          "TitleColor": "#FFFFFF",
+          "FontSize": 13
+        }
+      ]
+    },
+    {
+      "Name": "Fork Task",
+      "UUID": "com.driveline.codex-command-center.fork",
+      "Icon": "imgs/action-list/fork",
+      "Controllers": [
+        "Keypad"
+      ],
+      "States": [
+        {
+          "Image": "imgs/actions/fork",
+          "TitleAlignment": "bottom",
+          "TitleColor": "#FFFFFF",
+          "FontSize": 13
+        }
+      ]
+    },
+    {
+      "Name": "Skills",
+      "UUID": "com.driveline.codex-command-center.skills",
+      "Icon": "imgs/action-list/skills",
+      "Controllers": [
+        "Keypad"
+      ],
+      "States": [
+        {
+          "Image": "imgs/actions/skills",
+          "TitleAlignment": "bottom",
+          "TitleColor": "#FFFFFF",
+          "FontSize": 13
+        }
+      ]
+    },
+    {
+      "Name": "Settings",
+      "UUID": "com.driveline.codex-command-center.settings",
+      "Icon": "imgs/action-list/settings",
+      "Controllers": [
+        "Keypad"
+      ],
+      "States": [
+        {
+          "Image": "imgs/actions/settings",
+          "TitleAlignment": "bottom",
+          "TitleColor": "#FFFFFF",
+          "FontSize": 13
+        }
+      ]
+    },
+    {
+      "Name": "Custom Slot 1",
+      "UUID": "com.driveline.codex-command-center.blank1",
+      "Icon": "imgs/action-list/blank1",
+      "Controllers": [
+        "Keypad"
+      ],
+      "States": [
+        {
+          "Image": "imgs/actions/blank1",
+          "TitleAlignment": "bottom",
+          "TitleColor": "#FFFFFF",
+          "FontSize": 13
+        }
+      ]
+    },
+    {
+      "Name": "Custom Slot 2",
+      "UUID": "com.driveline.codex-command-center.blank2",
+      "Icon": "imgs/action-list/blank2",
+      "Controllers": [
+        "Keypad"
+      ],
+      "States": [
+        {
+          "Image": "imgs/actions/blank2",
+          "TitleAlignment": "bottom",
+          "TitleColor": "#FFFFFF",
+          "FontSize": 13
+        }
+      ]
+    }
+  ],
+  "ApplicationsToMonitor": {
+    "windows": [
+      "ChatGPT.exe"
+    ]
+  },
+  "Author": "Driveline Baseball",
+  "Category": "Codex Command Center",
+  "CategoryIcon": "imgs/category",
+  "CodePath": "bin/plugin.js",
+  "Description": "Direct Codex task, approval, model, and reasoning controls for Stream Deck + on Windows.",
+  "Icon": "imgs/plugin",
+  "Name": "Codex Command Center",
+  "Nodejs": {
+    "Version": "20"
+  },
+  "OS": [
+    {
+      "Platform": "windows",
+      "MinimumVersion": "10"
+    }
+  ],
+  "Profiles": [
+    {
+      "Name": "profiles/Codex Command Center",
+      "DeviceType": 7,
+      "Readonly": false,
+      "DontAutoSwitchWhenInstalled": false,
+      "AutoInstall": true
+    }
+  ],
+  "SDKVersion": 2,
+  "Software": {
+    "MinimumVersion": "7.1"
+  },
+  "UUID": "com.driveline.codex-command-center",
+  "Version": "1.0.0.0"
+}

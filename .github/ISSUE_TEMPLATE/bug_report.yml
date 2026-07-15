@@ -1,0 +1,66 @@
+name: Bug report
+description: Report a reproducible problem with the plugin, shim, installer, or controls.
+title: "[Bug]: "
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for helping improve Codex Command Center. Please remove task content, account details, and device serials from logs before attaching them.
+
+  - type: input
+    id: summary
+    attributes:
+      label: What happened?
+      placeholder: A concise description of the problem
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Reproduction steps
+      placeholder: |
+        1. Start Codex and Stream Deck
+        2. Turn or press ...
+        3. Observe ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+
+  - type: input
+    id: codex-version
+    attributes:
+      label: Codex app and CLI versions
+      placeholder: App 26.x; CLI 0.x
+    validations:
+      required: true
+
+  - type: input
+    id: streamdeck-version
+    attributes:
+      label: Stream Deck software and device
+      placeholder: Stream Deck 7.5; Stream Deck +
+    validations:
+      required: true
+
+  - type: textarea
+    id: diagnostics
+    attributes:
+      label: Redacted diagnostics
+      description: Paste relevant output from `npm run diagnose`. Remove private paths, task content, account information, and serials.
+      render: shell
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Safety check
+      options:
+        - label: I removed secrets, task content, account information, and device serials.
+          required: true

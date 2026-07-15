@@ -1,0 +1,84 @@
+{
+  "Controllers": [
+    {
+      "Type": "Keypad",
+      "Actions": {
+        "0,0": {
+          "Name": "New Task",
+          "UUID": "com.driveline.codex-command-center.new-task",
+          "Settings": {},
+          "State": 0,
+          "States": [{ "Image": "", "Title": "New Task", "TitleAlignment": "bottom", "TitleColor": "#FFFFFF", "FontSize": 13 }]
+        },
+        "1,0": {
+          "Name": "Review Changes",
+          "UUID": "com.driveline.codex-command-center.review",
+          "Settings": {},
+          "State": 0,
+          "States": [{ "Image": "", "Title": "Review", "TitleAlignment": "bottom", "TitleColor": "#FFFFFF", "FontSize": 13 }]
+        },
+        "2,0": {
+          "Name": "Approve",
+          "UUID": "com.driveline.codex-command-center.approve",
+          "Settings": {},
+          "State": 0,
+          "States": [{ "Image": "", "Title": "Approve", "TitleAlignment": "bottom", "TitleColor": "#FFFFFF", "FontSize": 13 }]
+        },
+        "3,0": {
+          "Name": "Decline",
+          "UUID": "com.driveline.codex-command-center.decline",
+          "Settings": {},
+          "State": 0,
+          "States": [{ "Image": "", "Title": "Decline", "TitleAlignment": "bottom", "TitleColor": "#FFFFFF", "FontSize": 13 }]
+        },
+        "0,1": {
+          "Name": "Stop Turn",
+          "UUID": "com.driveline.codex-command-center.stop",
+          "Settings": {},
+          "State": 0,
+          "States": [{ "Image": "", "Title": "Stop", "TitleAlignment": "bottom", "TitleColor": "#FFFFFF", "FontSize": 13 }]
+        },
+        "1,1": {
+          "Name": "Fork Task",
+          "UUID": "com.driveline.codex-command-center.fork",
+          "Settings": {},
+          "State": 0,
+          "States": [{ "Image": "", "Title": "Fork", "TitleAlignment": "bottom", "TitleColor": "#FFFFFF", "FontSize": 13 }]
+        },
+        "2,1": {
+          "Name": "Custom Slot 1",
+          "UUID": "com.driveline.codex-command-center.blank1",
+          "Settings": {},
+          "State": 0,
+          "States": [{ "Image": "", "Title": "", "TitleAlignment": "bottom", "TitleColor": "#FFFFFF", "FontSize": 13 }]
+        },
+        "3,1": {
+          "Name": "Custom Slot 2",
+          "UUID": "com.driveline.codex-command-center.blank2",
+          "Settings": {},
+          "State": 0,
+          "States": [{ "Image": "", "Title": "", "TitleAlignment": "bottom", "TitleColor": "#FFFFFF", "FontSize": 13 }]
+        }
+      }
+    },
+    {
+      "Type": "Encoder",
+      "Actions": {
+        "0,0": {
+          "Name": "Brainpower",
+          "UUID": "com.driveline.codex-command-center.reasoning",
+          "Settings": {},
+          "State": 0,
+          "States": [{ "Image": "", "Title": "Brainpower", "TitleAlignment": "bottom", "TitleColor": "#FFFFFF", "FontSize": 9 }]
+        },
+        "1,0": {
+          "Name": "Model",
+          "UUID": "com.driveline.codex-command-center.model",
+          "Settings": {},
+          "State": 0,
+          "States": [{ "Image": "", "Title": "Model", "TitleAlignment": "bottom", "TitleColor": "#FFFFFF", "FontSize": 9 }]
+        }
+      }
+    }
+  ]
+}

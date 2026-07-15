@@ -1,0 +1,33 @@
+name: Feature request
+description: Propose a control, compatibility improvement, or safer integration path.
+title: "[Feature]: "
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem or opportunity
+      description: What workflow would this improve?
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed behavior
+      description: Describe the key, dial, touch-strip, transport, or installer behavior you have in mind.
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+
+  - type: checkboxes
+    id: scope
+    attributes:
+      label: Scope
+      options:
+        - label: This request does not require collecting credentials or bypassing Codex approvals.
+          required: true

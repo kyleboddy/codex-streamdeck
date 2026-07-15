@@ -1,0 +1,22 @@
+node_modules/
+build/
+launcher/bin/
+launcher/obj/
+com.driveline.codex-command-center.sdPlugin/node_modules/
+com.driveline.codex-command-center.sdPlugin/logs/
+com.driveline.codex-command-center.sdPlugin/profiles/*.streamDeckProfile
+dist/
+recovery/
+
+# Editors and operating systems
+.vs/
+.vscode/
+*.user
+.DS_Store
+Thumbs.db
+
+# Local reports and credentials
+coverage/
+.env
+.env.*
+!.env.example

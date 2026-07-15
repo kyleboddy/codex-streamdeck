@@ -1,0 +1,8 @@
+{
+  "Controllers": [
+    { "Actions": null, "Type": "Keypad" },
+    { "Actions": null, "Type": "Encoder" }
+  ],
+  "Icon": "",
+  "Name": ""
+}

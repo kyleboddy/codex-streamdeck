@@ -1,0 +1,12 @@
+{
+  "Device": { "Model": "20GBD9901", "UUID": "" },
+  "InstalledByPluginUUID": "com.driveline.codex-command-center",
+  "Name": "Codex Command Center",
+  "Pages": {
+    "Current": "3e0895bc-6ae2-49c1-bbbd-8d856c4d390c",
+    "Default": "61b8c980-6f1d-4bc5-ae75-423a7e8eb6d2",
+    "Pages": ["3e0895bc-6ae2-49c1-bbbd-8d856c4d390c"]
+  },
+  "PreconfiguredName": "Codex Command Center",
+  "Version": "3.0"
+}
