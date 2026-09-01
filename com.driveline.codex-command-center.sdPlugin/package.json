@@ -3,7 +3,7 @@
   "private": true,
   "type": "module",
   "dependencies": {
-    "@elgato/streamdeck": "2.1.0",
+    "@elgato/streamdeck": "2.1.2",
     "ws": "8.21.1"
   }
 }
