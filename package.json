@@ -35,7 +35,7 @@
     "pack": "streamdeck pack com.driveline.codex-command-center.sdPlugin --output dist --force --no-update-check"
   },
   "devDependencies": {
-    "@elgato/cli": "1.7.4",
+    "@elgato/cli": "1.10.4",
     "postject": "1.0.0-alpha.6"
   }
 }
